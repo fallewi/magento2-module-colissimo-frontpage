@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <colissimofrontpage>
+                <!-- Carrier configuration -->
+                <model>LaPoste\ColissimoFrontPage\Model\Carrier</model>
+                <active>0</active>
+                <title>La Poste</title>
+                <name>Colissimo - Point de retrait</name>
+                <widget_url>https://ws.colissimo.fr/widget-point-retrait/resources/js/jquery.plugin.colissimo.js</widget_url>
+                <ws_auth_url>https://ws.colissimo.fr/widget-point-retrait/rest/authenticate.rest</ws_auth_url>
+                <ws_auth_login></ws_auth_login>
+                <ws_auth_pass></ws_auth_pass>
+                <amount></amount>
+                <min_quote_price_for_free></min_quote_price_for_free>
+                <min_order_total></min_order_total>
+                <max_order_total></max_order_total>
+                <max_weight>20</max_weight>
+                <sallowspecific>0</sallowspecific>
+                <specificcountry>FR</specificcountry>
+                <order_prepare_delay>0</order_prepare_delay>
+                <default_country>FR</default_country>
+                <default_address></default_address>
+                <default_postcode></default_postcode>
+                <default_city></default_city>
+                <sort_order></sort_order>
+            </colissimofrontpage>
+        </carriers>
+    </default>
+</config>
