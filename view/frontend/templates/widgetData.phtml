@@ -1,0 +1,24 @@
+<?php
+/** @var \LaPoste\ColissimoFrontPage\Block\Frontpage $block */
+?>
+<script type="text/javascript">
+    require(
+        ['LaPoste_ColissimoFrontPage/js/model/widget'],
+        function (widget) {
+            widget.setData(
+                {
+                    scriptUrl:          "<?= htmlspecialchars($block->getWidgetScriptUrl()) ?>",
+                    ceCountryList:      "<?= htmlspecialchars($block->getCountryList()) ?>",
+                    ceCountry:          "<?= htmlspecialchars($block->getCountry()) ?>",
+                    ceLang:             "<?= htmlspecialchars($block->getStoreLanguage()) ?>",
+                    dyPreparationTime:  "<?= htmlspecialchars($block->getOrderPrepareDelay()) ?>",
+                    ceAddress:          "<?= htmlspecialchars($block->getAddress()) ?>",
+                    ceZipCode:          "<?= htmlspecialchars($block->getPostcode()) ?>",
+                    ceTown:             "<?= htmlspecialchars($block->getCity()) ?>",
+                    dyWeight:           "<?= htmlspecialchars($block->getPackageWeight()) ?>",
+                    token:              "<?= htmlspecialchars($block->getToken()) ?>"
+                }
+            );
+        }
+    );
+</script>

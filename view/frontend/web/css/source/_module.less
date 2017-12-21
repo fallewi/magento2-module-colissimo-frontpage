@@ -1,0 +1,46 @@
+& when (@media-common = true) {
+    #colissimo-frontpage-widget-container {
+
+        // Customize widget color
+        .couleur1 { color:@text__color; }
+        .couleur2 { color:@primary__color; }
+        .police { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+        // Fix native css influence on widget
+        width: 160%;
+        margin-bottom: 20px;
+
+        table td,th { padding: 0; }
+        #zoneTableauHoraires1 table {  width: 217px; }
+        #onYourMapPudo {  width: 95% !important; }
+        .row{ margin-left: 0; }
+        .w363 {  width: 363px; }
+        .w150 { width: 150px; }
+        .w75 { width: 75px; }
+
+        .logo {
+            float: none;
+            margin: auto;
+            max-width: 100%;
+            position: inherit;
+            z-index: auto;
+        }
+
+        button {
+            box-shadow: none;
+            &:hover {
+                background: url(https://ws.colissimo.fr/widget-point-retrait/resources/css/images/btn/btn_valider_choix_bulle.jpg) no-repeat;
+                background-position: center;
+                border: none;
+                color: #FFFFFF;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    #colissimo-frontpage-widget-container {
+        width: 100%
+    }
+}
+
