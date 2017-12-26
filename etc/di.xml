@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Model\PaymentInformationManagement">
+        <plugin name="colissimofrontpage-payment-information-management-plugin" type="LaPoste\ColissimoFrontPage\Plugin\PaymentInformationManagementPlugin"/>
+    </type>
+
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="colissimofrontpage-shipping-information-management-plugin" type="LaPoste\ColissimoFrontPage\Plugin\ShippingInformationManagementPlugin"/>
+    </type>
+</config>

@@ -19,26 +19,26 @@ define(
 
         return Component.extend({
             isVisible: widgetModel.isVisible,
-            relayAddress: widgetModel.relayAddress,
+            previousValue: null,
+            hasBeenInitialize: false,
 
             /**
-             * @return {exports} TODO Doc
+             * Init widget view.
+             * listen to change shipping method event.
              */
             initialize: function () {
                 this._super();
-                quote.shippingMethod.subscribe(this.checkIfFrontPageIsSelected, this);
-                this.checkIfFrontPageIsSelected(quote.shippingMethod());
             },
 
-            checkIfFrontPageIsSelected: function(shippingMethod) {
-                if (
-                    shippingMethod
-                    && "method_code" in shippingMethod
-                    && shippingMethod.method_code == 'colissimofrontpage'
-                ) {
-                    widgetModel.show();
-                } else {
-                    widgetModel.hide();
+            /**
+             * After the template is loaded, check if colissimo shipping method is selected
+             */
+            onTemplateInit: function () {
+                quote.shippingMethod.subscribe(widgetModel.checkIfFrontPageIsSelected, widgetModel);
+                if (!this.hasBeenInitialize) {
+                    widgetModel.initRelayAddress();
+                    widgetModel.checkIfFrontPageIsSelected(quote.shippingMethod());
+                    this.hasBeenInitialize = true;
                 }
             }
         });

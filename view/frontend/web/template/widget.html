@@ -1,9 +1,1 @@
-<div id="colissimo-frontpage-widget-container" data-bind="if: isVisible"></div>
-<div id="colissimo-frontpage-widget-data-container">
-    <input type="hidden" name="relayAddress[id]" data-bind="attr: {value: relayAddress.id}" />
-    <input type="hidden" name="relayAddress[name]" data-bind="attr: {value: relayAddress.name}" />
-    <input type="hidden" name="relayAddress[street]" data-bind="attr: {value: relayAddress.street}" />
-    <input type="hidden" name="relayAddress[postcode]" data-bind="attr: {value: relayAddress.postcode}" />
-    <input type="hidden" name="relayAddress[city]" data-bind="attr: {value: relayAddress.city}" />
-    <input type="hidden" name="relayAddress[country]" data-bind="attr: {value: relayAddress.country}" />
-</div>
+<div id="colissimo-frontpage-widget-container" data-bind="visible: isVisible, attr: {init: onTemplateInit()}"></div>
