@@ -45,18 +45,16 @@ class Authentication extends AbstractHelper
 
     /**
      * @param Context $context
-     * @param LoggerInterface $logger
      * @param CacheInterface $cache
      * @param ConfigHelper $configHelper
      */
     public function __construct(
         Context $context,
-        LoggerInterface $logger,
         CacheInterface $cache,
         ConfigHelper $configHelper
     ) {
         parent::__construct($context);
-        $this->logger = $logger;
+        $this->logger = $context->getLogger();
         $this->cache = $cache;
         $this->configHelper = $configHelper;
     }
