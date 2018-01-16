@@ -32,7 +32,6 @@ define(
                     this._super();
                     addressList.subscribe(
                         function(newAddressList) {
-                            console.log('addressListaddressListaddressList');
                             this.visible(newAddressList.length > 0);
                         },
                         this

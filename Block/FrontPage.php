@@ -23,7 +23,7 @@ use Magento\Checkout\Model\Session as CheckoutSession;
  *
  * @author Smile (http://www.smile.fr)
  */
-class Frontpage extends Template
+class FrontPage extends Template
 {
     /** @var ConfigHelper */
     protected $configHelper;

@@ -1,5 +1,5 @@
 <?php
-/** @var \LaPoste\ColissimoFrontPage\Block\Frontpage $block */
+/** @var \LaPoste\ColissimoFrontPage\Block\FrontPage $block */
 ?>
 <script type="text/javascript">
     require(
@@ -12,9 +12,9 @@
                     ceCountry:          "<?= htmlspecialchars($block->getCountry()) ?>",
                     ceLang:             "<?= htmlspecialchars($block->getStoreLanguage()) ?>",
                     dyPreparationTime:  "<?= htmlspecialchars($block->getOrderPrepareDelay()) ?>",
-                    ceAddress:          "<?= htmlspecialchars($block->getAddress()) ?>",
-                    ceZipCode:          "<?= htmlspecialchars($block->getPostcode()) ?>",
-                    ceTown:             "<?= htmlspecialchars($block->getCity()) ?>",
+                    ceAddress:          "<?= json_encode(htmlspecialchars($block->getAddress()))) ?>",
+                    ceZipCode:          "<?= json_encode(htmlspecialchars($block->getPostcode())) ?>",
+                    ceTown:             "<?= json_encode(htmlspecialchars($block->getCity())) ?>",
                     dyWeight:           "<?= htmlspecialchars($block->getPackageWeight()) ?>",
                     token:              "<?= htmlspecialchars($block->getToken()) ?>"
                 }
