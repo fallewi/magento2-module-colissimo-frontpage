@@ -44,6 +44,7 @@ class Config extends AbstractHelper
     const PATH_CARRIER_DEFAULT_ADDRESS          = 'carriers/colissimofrontpage/default_address';
     const PATH_CARRIER_DEFAULT_POSTCODE         = 'carriers/colissimofrontpage/default_postcode';
     const PATH_CARRIER_DEFAULT_CITY             = 'carriers/colissimofrontpage/default_city';
+    const PATH_RESOURCE_URL                     = 'carriers/colissimofrontpage/resource_url';
     const PATH_CARRIER_SORT_ORDER               = 'carriers/colissimofrontpage/sort_order';
     const GENERAL_AUTHORIZED_COUTRNIES          = 'general/country/allow';
     /**#@-*/
@@ -117,8 +118,7 @@ class Config extends AbstractHelper
      */
     public function getWidgetUrl()
     {
-        // TODO
-        return 'https://soco-community-2.1.vm/pub/static/frontend/Magento/luma/fr_FR/LaPoste_ColissimoFrontPage/js//jquery.frameColiposte.js';//$this->scopeConfig->getValue(self::PATH_CARRIER_WIDGET_URL, ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->getValue(self::PATH_CARRIER_WIDGET_URL, ScopeInterface::SCOPE_STORE);
     }
 
     /**
@@ -272,5 +272,15 @@ class Config extends AbstractHelper
     public function getDefaultCity()
     {
         return $this->scopeConfig->getValue(self::PATH_CARRIER_DEFAULT_CITY, ScopeInterface::SCOPE_STORE);
+    }
+
+    /**
+     * Get colissimo resource url.
+     *
+     * @return string
+     */
+    public function getColissimoResourceUrl()
+    {
+        return $this->scopeConfig->getValue(self::PATH_RESOURCE_URL, ScopeInterface::SCOPE_STORE);
     }
 }

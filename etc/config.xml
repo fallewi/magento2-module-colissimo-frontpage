@@ -24,6 +24,7 @@
                 <default_address></default_address>
                 <default_postcode></default_postcode>
                 <default_city></default_city>
+                <resource_url>https://ws.colissimo.fr/</resource_url>
                 <sort_order></sort_order>
             </colissimofrontpage>
         </carriers>

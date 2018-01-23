@@ -97,6 +97,10 @@
                     <label>Default City</label>
                 </field>
 
+                <field id="resource_url" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Resource Base Url</label>
+                </field>
+
                 <field id="sort_order" translate="label" type="text" sortOrder="270" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Sort Order</label>
                 </field>

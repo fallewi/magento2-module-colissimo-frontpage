@@ -166,4 +166,14 @@ class FrontPage extends Template
         $locale = $this->localResolver->getLocale();
         return $locale ? substr($locale, 0, 2) : '';
     }
+
+    /**
+     * Get colissimo resource url.
+     *
+     * @return string
+     */
+    public function getColissimoResourceUrl()
+    {
+        return $this->configHelper->getColissimoResourceUrl();
+    }
 }

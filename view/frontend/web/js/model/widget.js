@@ -7,6 +7,7 @@
  * @copyright 2017 La Poste
  * @license   Open Software License ("OSL") v. 3.0
  */
+
 define(
     [
         'ko',
@@ -41,7 +42,7 @@ define(
                 retryNumber = typeof retryNumber == 'undefined' ? 0 : retryNumber;
                 var widgetContainer = $(this.widgetContainerId);
                 if (widgetContainer.length) {
-                    this.data['callBackFrame'] = this.selectRelayPointCallback;
+                    this.data['callBackFrame'] = 'callBackFrame';
                     if (widgetContainer.frameColissimoOpen) {
                         widgetContainer.frameColissimoOpen(this.data);
                         this.isInitialized = true;
@@ -65,22 +66,12 @@ define(
             },
 
             /**
-             * Callback method used when a relay point is selected.
-             * @param point
-             */
-            selectRelayPointCallback: function callBackFrame(point) {
-                // The wdget does't allow callback with a context (the methode content is copied in another contexte)
-                // so we trigger an event which will trigger a method with this object context.
-                jQuery(document).trigger('relaySelected', point);
-            },
-
-            /**
              * Select a relay point.
              *
              * @param event
-             * @param point
              */
-            selectedRelayPoint: function (event, point) {
+            selectedRelayPoint: function (event) {
+                var point = event.detail;
                 if (typeof point === 'object') {
                     this.hide();
                     var relayShippingAddress = relayAddressManager.createRelayAddress(

@@ -67,7 +67,7 @@ class ValidateOnSubmit implements ObserverInterface
             return;
         }
 
-        $colissimoRelayData = $this->checkoutSession->getData('colissimofrontpage_shipping_data');
+        $colissimoRelayData = json_decode($this->checkoutSession->getData('colissimofrontpage_shipping_data'), true);
 
         if (
             !is_array($colissimoRelayData)

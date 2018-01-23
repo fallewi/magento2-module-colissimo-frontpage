@@ -2,6 +2,13 @@
 /** @var \LaPoste\ColissimoFrontPage\Block\FrontPage $block */
 ?>
 <script type="text/javascript">
+    function callBackFrame(point) {
+        // The widget does't allow callback with a context (the method content is copied in another context)
+        // so we trigger an event which will trigger a method with this object context.
+        var event = new CustomEvent("relaySelected", { detail: point });
+        document.dispatchEvent(event);
+    }
+
     require(
         ['LaPoste_ColissimoFrontPage/js/model/widget'],
         function (widget) {
@@ -12,11 +19,12 @@
                     ceCountry:          "<?= htmlspecialchars($block->getCountry()) ?>",
                     ceLang:             "<?= htmlspecialchars($block->getStoreLanguage()) ?>",
                     dyPreparationTime:  "<?= htmlspecialchars($block->getOrderPrepareDelay()) ?>",
-                    ceAddress:          "<?= json_encode(htmlspecialchars($block->getAddress()))) ?>",
-                    ceZipCode:          "<?= json_encode(htmlspecialchars($block->getPostcode())) ?>",
-                    ceTown:             "<?= json_encode(htmlspecialchars($block->getCity())) ?>",
+                    ceAddress:          <?= json_encode(htmlspecialchars($block->getAddress())) ?>,
+                    ceZipCode:          <?= json_encode(htmlspecialchars($block->getPostcode())) ?>,
+                    ceTown:             <?= json_encode(htmlspecialchars($block->getCity())) ?>,
                     dyWeight:           "<?= htmlspecialchars($block->getPackageWeight()) ?>",
-                    token:              "<?= htmlspecialchars($block->getToken()) ?>"
+                    token:              "<?= htmlspecialchars($block->getToken()) ?>",
+                    URLColissimo:       "<?= htmlspecialchars($block->getColissimoResourceUrl()) ?>"
                 }
             );
         }
