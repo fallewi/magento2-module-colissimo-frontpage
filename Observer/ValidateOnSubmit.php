@@ -67,6 +67,11 @@ class ValidateOnSubmit implements ObserverInterface
             return;
         }
 
+        // Copy phone number from billing address for relay address
+        if ($billingAddress = $this->checkoutSession->getQuote()->getBillingAddress()) {
+            $shippingAddress->setTelephone($billingAddress->getTelephone());
+        }
+
         $colissimoRelayData = json_decode($this->checkoutSession->getData('colissimofrontpage_shipping_data'), true);
 
         if (
