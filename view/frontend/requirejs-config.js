@@ -18,6 +18,9 @@ var config = {
             },
             'Magento_Checkout/js/view/shipping-address/list': {
                 'LaPoste_ColissimoFrontPage/js/view/shipping-address-list-mixin': true
+            },
+            'Magento_Checkout/js/view/billing-address': {
+                'LaPoste_ColissimoFrontPage/js/view/billing-address-mixin': true
             }
         }
     }
