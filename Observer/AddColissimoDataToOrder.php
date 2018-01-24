@@ -45,7 +45,10 @@ class AddColissimoDataToOrder implements ObserverInterface
         $order = $observer->getEvent()->getOrder();
 
         if ($order->getShippingMethod() === 'colissimofrontpage_colissimofrontpage') {
-            $colissimoRelayData = $this->checkoutSession->getData('colissimofrontpage_shipping_data');
+            $colissimoRelayData = json_decode(
+                $this->checkoutSession->getData('colissimofrontpage_shipping_data'),
+                true
+            );
             
             if (
                 is_array($colissimoRelayData)
