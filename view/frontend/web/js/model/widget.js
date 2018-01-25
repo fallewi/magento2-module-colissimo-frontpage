@@ -21,7 +21,7 @@ define(
         'use strict';
 
         /**
-         * TODO Doc
+         * Script that control colissimo widget.
          */
         return {
 
@@ -60,6 +60,32 @@ define(
              */
             setData: function(data) {
                 this.data = data;
+                quote.shippingAddress.subscribe(
+                    function(newAddress) {
+                        this.data['ceAddress'] = newAddress.street
+                            ? newAddress.street.join(' ')
+                            : this.data['ceAddress'];
+                        this.data['ceZipCode'] = newAddress.street
+                            ? newAddress.postcode
+                            : this.data['ceZipCode'];
+                        this.data['ceTown'] = newAddress.city
+                            ? newAddress.city
+                            : this.data['ceTown'];
+
+                        // If widget is already initialize, reset it
+                        var widgetContainer = $(this.widgetContainerId);
+                        if (
+                            widgetContainer.length
+                            && widgetContainer.frameColissimoClose
+                            && widgetContainer.frameColissimoOpen
+                            && this.isInitialized
+                        ) {
+                            widgetContainer.frameColissimoClose();
+                            widgetContainer.frameColissimoOpen(this.data);
+                        }
+                    }.bind(this)
+                );
+
                 // Load script
                 $.ajax({ async: true, dataType: "script", url: this.data.scriptUrl });
                 // The widget is not initialized now because it need its div to be visible.
