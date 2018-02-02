@@ -29,7 +29,12 @@ define(
                         function (value) {
                             if (value) {
                                 var billingAddress = quote.billingAddress();
-                                if (typeof billingAddress.postcode == 'undefined') {
+                                if (
+                                    ! quote.billingAddress()
+                                    || typeof billingAddress.postcode == 'undefined'
+                                    || !quote.billingAddress().canUseForBilling()
+                                ) {
+                                    quote.billingAddress(null);
                                     this.isAddressDetailsVisible(false);
                                 }
                             }

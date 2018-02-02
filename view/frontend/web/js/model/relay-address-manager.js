@@ -71,7 +71,7 @@ define(
                 if (quote.shippingAddress() && quote.shippingAddress().getType() != 'new-relay-address')
                 {
                     this.previousSelectedAddress = quote.shippingAddress();
-                    if (!quote.billingAddress()) {
+                    if (!quote.billingAddress() && this.previousSelectedAddress.canUseForBilling()) {
                         selectBillingAddressAction(this.previousSelectedAddress);
                     }
                 }
