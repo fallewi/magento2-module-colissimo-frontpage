@@ -5,7 +5,8 @@
     function callBackFrame(point) {
         // The widget does't allow callback with a context (the method content is copied in another context)
         // so we trigger an event which will trigger a method with this object context.
-        var event = new CustomEvent("relaySelected", { detail: point });
+        var event = document.createEvent("CustomEvent");
+        event.initCustomEvent('relaySelected', false, false, point);
         document.dispatchEvent(event);
     }
 
