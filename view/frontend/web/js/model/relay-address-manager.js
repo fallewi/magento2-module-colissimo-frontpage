@@ -46,11 +46,11 @@ define(
             /**
              * Init relay address.
              */
-            initRelayAddress: function() {
+            initRelayAddress: function () {
                 addressList.valueHasMutated();
                 var hasRelayAddress = false;
                 addressList().some(
-                    function(currentAddress, index)    {
+                    function (currentAddress, index) {
                         if (currentAddress.getType() == 'new-relay-address') {
                             hasRelayAddress = true;
                         }
@@ -68,8 +68,7 @@ define(
              * @param address
              */
             selectRelayAddress: function (address) {
-                if (quote.shippingAddress() && quote.shippingAddress().getType() != 'new-relay-address')
-                {
+                if (quote.shippingAddress() && quote.shippingAddress().getType() != 'new-relay-address') {
                     this.previousSelectedAddress = quote.shippingAddress();
                     if (!quote.billingAddress() && this.previousSelectedAddress.canUseForBilling()) {
                         selectBillingAddressAction(this.previousSelectedAddress);
@@ -90,13 +89,21 @@ define(
              */
             createRelayAddress: function (addressData) {
                 var relayAddress = addressConverter.formAddressDataToQuoteAddress(addressData);
-                relayAddress.isEditable = function () { return false; };
-                relayAddress.canUseForBilling = function () { return false; };
-                relayAddress.getType = function () { return 'new-relay-address'; };
-                relayAddress.getKey = function () { return 'new-relay-address'; };
+                relayAddress.isEditable = function () {
+                    return false;
+                };
+                relayAddress.canUseForBilling = function () {
+                    return false;
+                };
+                relayAddress.getType = function () {
+                    return 'new-relay-address';
+                };
+                relayAddress.getKey = function () {
+                    return 'new-relay-address';
+                };
 
                 var isAddressUpdated = addressList().some(
-                    function(currentAddress, index, addresses)    {
+                    function (currentAddress, index, addresses) {
                         if (currentAddress.getKey() == relayAddress.getKey()) {
                             addresses[index] = relayAddress;
                             return true;
@@ -110,8 +117,9 @@ define(
 
                 relayAddress.extension_attributes = ("extension_attributes" in addressData)
                     ? addressData.extension_attributes
-                    : { colissimoRelayData: JSON.stringify(
-                        { relayId : ("identifiant" in addressData) ? addressData.identifiant : null }
+                    : {
+                        colissimoRelayData: JSON.stringify(
+                            { relayId : ("identifiant" in addressData) ? addressData.identifiant : null }
                         )
                     };
 
@@ -140,7 +148,7 @@ define(
 
                 var relayAddressIndex = false;
                 addressList().some(
-                    function(currentAddress, index)    {
+                    function (currentAddress, index) {
                         if (currentAddress.getType() == 'new-relay-address') {
                             relayAddressIndex = index;
                         }
@@ -162,12 +170,12 @@ define(
              * Add update button on relay address.
              * Use a custom button instead of the native one to be able to cache the event on show the widget.
              */
-            addUpdateButton: function() {
+            addUpdateButton: function () {
                 // Use a timeout in order to wait the next ko render
                 // and avoid to add the button to the wrong address component
                 setTimeout(
                     $.proxy(
-                        function() {
+                        function () {
                             var addressComponent = $(this.addressElement).last();
                             if (!addressComponent.find('.edit-relay-address-link').length) {
                                 addressComponent.append(
@@ -213,7 +221,7 @@ define(
             /**
              * Disable the button to prevent select customer address with relay point shipping method.
              */
-            disableNonRelayAddress: function() {
+            disableNonRelayAddress: function () {
                 $('.action-select-shipping-item').hide();
                 $('.action-show-popup').hide();
             },
@@ -221,7 +229,7 @@ define(
             /**
              * Enable the button to allow select customer.
              */
-            enableNonRelayAddress: function() {
+            enableNonRelayAddress: function () {
                 $('.action-select-shipping-item').show();
                 $('.action-show-popup').show();
             }

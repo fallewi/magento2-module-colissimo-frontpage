@@ -26,6 +26,7 @@ class InstallSchema implements InstallSchemaInterface
 {
     /**
      * {@inheritdoc}
+     *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)

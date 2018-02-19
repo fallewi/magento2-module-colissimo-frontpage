@@ -25,9 +25,7 @@ use Magento\Framework\Exception\CouldNotSaveException;
  */
 class ShippingInformationManagementPlugin
 {
-    /**
-     * @var Session
-     */
+    /** @var Session */
     protected $checkoutSession;
 
     /**
@@ -56,8 +54,7 @@ class ShippingInformationManagementPlugin
 
         if ($addressInformation->getShippingCarrierCode() == 'colissimofrontpage') {
             $extensionAttributes = $addressInformation->getShippingAddress()->getExtensionAttributes();
-            if (
-                $extensionAttributes
+            if ($extensionAttributes
                 && ($colissimoRelayData = json_decode($extensionAttributes->getColissimoRelayData(), true))
                 && is_array($colissimoRelayData)
                 && array_key_exists('relayId', $colissimoRelayData)

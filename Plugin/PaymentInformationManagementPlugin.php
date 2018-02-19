@@ -26,9 +26,7 @@ use Magento\Quote\Api\Data\PaymentInterface;
  */
 class PaymentInformationManagementPlugin
 {
-    /**
-     * @var ValidateOnSubmit
-     */
+    /** @var ValidateOnSubmit */
     protected $observer;
 
     /**

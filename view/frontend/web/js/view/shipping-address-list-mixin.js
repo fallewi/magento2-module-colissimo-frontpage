@@ -31,7 +31,7 @@ define(
                 initialize: function () {
                     this._super();
                     addressList.subscribe(
-                        function(newAddressList) {
+                        function (newAddressList) {
                             this.visible(newAddressList.length > 0);
                         },
                         this

@@ -29,8 +29,7 @@ define(
                         function (value) {
                             if (value) {
                                 var billingAddress = quote.billingAddress();
-                                if (
-                                    ! quote.billingAddress()
+                                if (! quote.billingAddress()
                                     || typeof billingAddress.postcode == 'undefined'
                                     || !quote.billingAddress().canUseForBilling()
                                 ) {

@@ -32,7 +32,7 @@ define(
                 initialize: function () {
                     this._super();
                     addressList.subscribe(
-                        function(newAddressList) {
+                        function (newAddressList) {
                             this.isFormInline = newAddressList.length == 0;
                             if (this.isFormInline) {
                                 $('.form-shipping-address').show();
@@ -51,8 +51,7 @@ define(
                 validateShippingInformation: function () {
                     var shippingMethod = quote.shippingMethod();
                     var self = this;
-                    if (
-                        shippingMethod.carrier_code !== 'colissimofrontpage'
+                    if (shippingMethod.carrier_code !== 'colissimofrontpage'
                         || widgetModel.validateRelayPoint(self)
                     ) {
                         return this._super();

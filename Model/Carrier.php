@@ -43,39 +43,25 @@ class Carrier extends AbstractCarrier implements CarrierInterface
      */
     const CODE = 'colissimofrontpage';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $_code = self::CODE;
 
-    /**
-     * @var State
-     */
+    /** @var State */
     protected $appState;
 
-    /**
-     * @var ResultFactory
-     */
+    /** @var ResultFactory */
     protected $rateResultFactory;
 
-    /**
-     * @var MethodFactory
-     */
+    /** @var MethodFactory */
     protected $rateMethodFactory;
 
-    /**
-     * @var StatusFactory
-     */
+    /** @var StatusFactory */
     protected $trackResultFactory;
 
-    /**
-     * @var Session
-     */
+    /** @var Session */
     protected $checkoutSession;
 
-    /**
-     * @var ConfigHelper
-     */
+    /** @var ConfigHelper */
     protected $configHelper;
 
     /**

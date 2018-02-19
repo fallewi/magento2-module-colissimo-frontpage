@@ -38,7 +38,7 @@ define(
             /**
              * Init Colissimo FrontPage Widget.
              */
-            init: function(retryNumber) {
+            init: function (retryNumber) {
                 retryNumber = typeof retryNumber == 'undefined' ? 0 : retryNumber;
                 var widgetContainer = $(this.widgetContainerId);
                 if (widgetContainer.length) {
@@ -58,10 +58,10 @@ define(
              * Init Colissimo to FrontPage Widget.
              * @param data
              */
-            setData: function(data) {
+            setData: function (data) {
                 this.data = data;
                 quote.shippingAddress.subscribe(
-                    function(newAddress) {
+                    function (newAddress) {
                         this.data['ceAddress'] = newAddress.street
                             ? newAddress.street.join(' ')
                             : this.data['ceAddress'];
@@ -74,8 +74,7 @@ define(
 
                         // If widget is already initialize, reset it
                         var widgetContainer = $(this.widgetContainerId);
-                        if (
-                            widgetContainer.length
+                        if (widgetContainer.length
                             && widgetContainer.frameColissimoClose
                             && widgetContainer.frameColissimoOpen
                             && this.isInitialized
@@ -130,8 +129,7 @@ define(
             validateRelayPoint: function (shippingStep) {
                 var errorCode = $(this.errorCodeElement).val();
 
-                if (
-                    (typeof errorCode != 'undefined' && errorCode != 0)
+                if ((typeof errorCode != 'undefined' && errorCode != 0)
                     || quote.shippingAddress().getType() != 'new-relay-address'
                 ) {
                     shippingStep.errorValidationMessage(
@@ -147,7 +145,7 @@ define(
             /**
              * Show colissimo frontpage widget.
              */
-            show: function() {
+            show: function () {
                 if (!this.isInitialized) {
                     this.init();
                 }
@@ -161,7 +159,7 @@ define(
             /**
              * Hide colissimo frontpage widget.
              */
-            hide: function() {
+            hide: function () {
                 this.isVisible(false);
                 var previousValue = this.isVisible();
                 if (previousValue === true) {
@@ -174,9 +172,8 @@ define(
              *
              * @param shippingMethod
              */
-            checkIfFrontPageIsSelected: function(shippingMethod) {
-                if (
-                    shippingMethod
+            checkIfFrontPageIsSelected: function (shippingMethod) {
+                if (shippingMethod
                     && "method_code" in shippingMethod
                 ) {
                     if (shippingMethod.method_code != this.previousValue) {
@@ -188,8 +185,7 @@ define(
                             this.hide();
                         }
                     } else {
-                        if (
-                            shippingMethod.method_code == 'colissimofrontpage'
+                        if (shippingMethod.method_code == 'colissimofrontpage'
                             && quote.shippingAddress().getType() != 'new-relay-address'
                         ) {
                             this.show();
@@ -203,7 +199,7 @@ define(
             /**
              * Init relay address.
              */
-            initRelayAddress: function() {
+            initRelayAddress: function () {
                 relayAddressManager.initRelayAddress();
             }
         };

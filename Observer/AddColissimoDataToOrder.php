@@ -23,9 +23,7 @@ use Magento\Framework\Exception\LocalizedException;
  */
 class AddColissimoDataToOrder implements ObserverInterface
 {
-    /**
-     * @var Session
-     */
+    /** @var Session */
     protected $checkoutSession;
 
     /**
@@ -50,8 +48,7 @@ class AddColissimoDataToOrder implements ObserverInterface
                 true
             );
             
-            if (
-                is_array($colissimoRelayData)
+            if (is_array($colissimoRelayData)
                 && array_key_exists('relayId', $colissimoRelayData)
                 && $colissimoRelayData['relayId']
             ) {

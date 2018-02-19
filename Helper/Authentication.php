@@ -14,6 +14,7 @@ use LaPoste\ColissimoFrontPage\Helper\Config as ConfigHelper;
 use Magento\Framework\App\CacheInterface;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
+use Magento\Framework\HTTP\Client\Curl;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -23,40 +24,38 @@ use Psr\Log\LoggerInterface;
  */
 class Authentication extends AbstractHelper
 {
-    /**
-     * @var LoggerInterface
-     */
+    /** @var LoggerInterface */
     protected $logger;
 
-    /**
-     * @var CacheInterface
-     */
+    /** @var CacheInterface */
     protected $cache;
 
-    /**
-     * @var ConfigHelper
-     */
+    /**  @var ConfigHelper */
     protected $configHelper;
 
-    /**
-     * @var string
-     */
+    /** @var Curl */
+    protected $curl;
+
+    /** @var string */
     protected $token;
 
     /**
      * @param Context $context
      * @param CacheInterface $cache
      * @param ConfigHelper $configHelper
+     * @param Curl $curl
      */
     public function __construct(
         Context $context,
         CacheInterface $cache,
-        ConfigHelper $configHelper
+        ConfigHelper $configHelper,
+        Curl $curl
     ) {
         parent::__construct($context);
         $this->logger = $context->getLogger();
         $this->cache = $cache;
         $this->configHelper = $configHelper;
+        $this->curl = $curl;
     }
 
     /**
@@ -88,38 +87,28 @@ class Authentication extends AbstractHelper
      */
     protected function generateNewToken()
     {
-        $data = http_build_query(
-            [
-                'login'     => $this->configHelper->getAuthenticationWebserviceLogin(),
-                'password'  => $this->configHelper->getAuthenticationWebservicePassword(),
-            ]
-        );
+        $data = [
+            'login'     => $this->configHelper->getAuthenticationWebserviceLogin(),
+            'password'  => $this->configHelper->getAuthenticationWebservicePassword(),
+        ];
 
-        $curlHandle = curl_init();
-        curl_setopt($curlHandle, CURLOPT_URL, $this->configHelper->getAuthenticationWebserviceUrl());
-        curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt(
-            $curlHandle,
-            CURLOPT_HTTPHEADER,
+        $this->curl->setHeaders(
             [
-                'Content-Type: application/x-www-form-urlencoded',
-                'Charset: utf-8',
-                'Content-Length: ' . strlen($data)
+                'Content-Type'  => 'application/x-www-form-urlencoded',
+                'Charset'       => 'utf-8',
+                'Content-Length'=> strlen(http_build_query($data)),
             ]
         );
 
         // Send a request to the authentication webservice
         try {
-            $output = curl_exec($curlHandle);
-            $response = json_decode($output);
+            $this->curl->post($this->configHelper->getAuthenticationWebserviceUrl(), $data);
+            $response = json_decode($this->curl->getBody());
             $token = isset($response->token) ? $response->token : false;
         } catch (\Exception $e) {
             $this->logger->alert($e->getMessage());
             $token = false;
         }
-        curl_close($curlHandle);
 
         return $token;
     }

@@ -15,15 +15,13 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 
 /**
- * Clear colission shipping data in checkout session.
+ * Clear colissimo shipping data in checkout session.
  *
  * @author Smile (http://www.smile.fr)
  */
 class ClearCheckoutSession implements ObserverInterface
 {
-    /**
-     * @var Session
-     */
+    /** @var Session */
     protected $checkoutSession;
 
     /**
@@ -36,8 +34,9 @@ class ClearCheckoutSession implements ObserverInterface
 
     /**
      * {@inheritdoc}
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function execute(Observer $observer)
+    public function execute(Observer $observer = null)
     {
         if ($this->checkoutSession) {
             $this->checkoutSession->unsetData('colissimofrontpage_shipping_data');

@@ -25,24 +25,16 @@ use Magento\Framework\Exception\LocalizedException;
  */
 class ValidateOnSubmit implements ObserverInterface
 {
-    /**
-     * @var Session
-     */
+    /** @var Session */
     protected $checkoutSession;
 
-    /**
-     * @var ManagerInterface
-     */
+    /** @var ManagerInterface */
     protected $messageManager;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $errorOccurred = false;
 
-    /**
-     * @var Phrase|null
-     */
+    /** @var Phrase|null */
     protected $errorMessage;
 
     /**
@@ -59,8 +51,9 @@ class ValidateOnSubmit implements ObserverInterface
 
     /**
      * {@inheritdoc}
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function execute(Observer $observer)
+    public function execute(Observer $observer = null)
     {
         $shippingAddress = $this->checkoutSession->getQuote()->getShippingAddress();
         if ($shippingAddress->getShippingMethod() !== 'colissimofrontpage_colissimofrontpage') {
@@ -74,8 +67,7 @@ class ValidateOnSubmit implements ObserverInterface
 
         $colissimoRelayData = json_decode($this->checkoutSession->getData('colissimofrontpage_shipping_data'), true);
 
-        if (
-            !is_array($colissimoRelayData)
+        if (!is_array($colissimoRelayData)
             || !array_key_exists('relayId', $colissimoRelayData)
             || empty($colissimoRelayData['relayId'])
         ) {
