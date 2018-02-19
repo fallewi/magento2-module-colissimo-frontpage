@@ -20,4 +20,4 @@ composer require laposte-colissimo/magento2-module-colissimo-frontpage
 Documentation
 -------------
 
-The documentation of the module is available [on dropbox](https://www.dropbox.com/sh/lm1td154as7p2gp/AAAlGgwkDUF7sbWthgyQeiAca?dl=0) (in French).
+The documentation of the module is available [on dropbox](https://www.dropbox.com/sh/lm1td154as7p2gp/AAAlGgwkDUF7sbWthgyQeiAca?dl=0) (in English & French).
