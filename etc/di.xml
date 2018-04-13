@@ -7,4 +7,32 @@
     <type name="Magento\Checkout\Model\ShippingInformationManagement">
         <plugin name="colissimofrontpage-shipping-information-management-plugin" type="LaPoste\ColissimoFrontPage\Plugin\ShippingInformationManagementPlugin"/>
     </type>
+
+    <type name="Magento\Multishipping\Block\Checkout\Addresses">
+        <plugin name="colissimofrontpage-shipping-addresses" type="LaPoste\ColissimoFrontPage\Plugin\AddRelayAddressOption"/>
+    </type>
+
+    <type name="Magento\Multishipping\Model\Checkout\Type\Multishipping">
+        <plugin name="colissimofrontpage-add-shipping-item" type="LaPoste\ColissimoFrontPage\Plugin\AddShippingItem"/>
+    </type>
+
+    <type name="Magento\Quote\Model\Quote">
+        <plugin name="colissimofrontpage-add-relay-address" type="LaPoste\ColissimoFrontPage\Plugin\AddRelayAddressAsShipping"/>
+    </type>
+
+    <type name="Magento\Multishipping\Block\Checkout\Shipping">
+        <plugin name="colissimofrontpage-filter-shipping-methode" type="LaPoste\ColissimoFrontPage\Plugin\FilterShippingMethods"/>
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Address">
+        <plugin name="colissimofrontpage-render-relay-address" type="LaPoste\ColissimoFrontPage\Plugin\RenderRelayAddress"/>
+    </type>
+
+    <type name="Magento\Multishipping\Block\Checkout\Overview">
+        <plugin name="colissimofrontpage-edit-address-link" type="LaPoste\ColissimoFrontPage\Plugin\EditAddressLink"/>
+    </type>
+
+    <type name="Magento\Multishipping\Model\Cart\Controller\CartPlugin">
+        <plugin name="colissimofrontpage-reset-relay-id" type="LaPoste\ColissimoFrontPage\Plugin\ResetRelayId"/>
+    </type>
 </config>

@@ -54,6 +54,8 @@ class AddColissimoDataToOrder implements ObserverInterface
             ) {
                 $colissimoDataJson = json_encode($colissimoRelayData, JSON_FORCE_OBJECT);
                 $order->setData(Config::FIELD_COLISSIMO_RELAY_ADDRESS_DATA, $colissimoDataJson);
+            } else {
+                throw new \Exception(__('"Colissimo: Please choose a relay point'));
             }
         }
     }

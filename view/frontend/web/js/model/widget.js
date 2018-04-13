@@ -160,8 +160,8 @@ define(
              * Hide colissimo frontpage widget.
              */
             hide: function () {
-                this.isVisible(false);
                 var previousValue = this.isVisible();
+                this.isVisible(false);
                 if (previousValue === true) {
                     $('html,body').animate({ scrollTop: $(this.addressListElement).offset().top }, 'fast');
                 }

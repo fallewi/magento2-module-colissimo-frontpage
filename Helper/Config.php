@@ -82,6 +82,16 @@ class Config extends AbstractHelper
     ];
 
     /**
+     * Colissimo relay address data field (on order entity).
+     */
+    const RELAY_ADDRESS_FAKE_ID = 'colissimo_frontpage_relay';
+
+    /**
+     * Colissimo relay address type.
+     */
+    const RELAY_ADDRESS_TYPE_MULTISHIPPING = 'lpc_fp';
+
+    /**
      * Check if the carrier is enabled.
      *
      * @return bool

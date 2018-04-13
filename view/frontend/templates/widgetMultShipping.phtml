@@ -1,0 +1,39 @@
+<?php
+/**
+ * @var \LaPoste\ColissimoFrontPage\Block\FrontPage $block
+ * @codingStandardsIgnoreFile
+ */
+?>
+<div id="colissimo-frontpage-widget-container"></div>
+<script type="text/javascript">
+    function callBackFrame(point) {
+        // The widget does't allow callback with a context (the method content is copied in another context)
+        // so we trigger an event which will trigger a method with this object context.
+        var event = document.createEvent("CustomEvent");
+        event.initCustomEvent('relaySelected', false, false, point);
+        document.dispatchEvent(event);
+    }
+
+    require(
+        ['jquery', 'LaPoste_ColissimoFrontPage/js/model/widget-multi-shipping'],
+        function ($, widget) {
+            widget.setData(
+                {
+                    scriptUrl:          "<?= htmlspecialchars($block->getWidgetScriptUrl()) ?>",
+                    ceCountryList:      "<?= htmlspecialchars($block->getCountryList()) ?>",
+                    ceCountry:          "<?= htmlspecialchars($block->getCountry()) ?>",
+                    ceLang:             "<?= htmlspecialchars($block->getStoreLanguage()) ?>",
+                    dyPreparationTime:  "<?= htmlspecialchars($block->getOrderPrepareDelay()) ?>",
+                    ceAddress:          <?= json_encode(htmlspecialchars($block->getAddress())) ?>,
+                    ceZipCode:          <?= json_encode(htmlspecialchars($block->getPostcode())) ?>,
+                    ceTown:             <?= json_encode(htmlspecialchars($block->getCity())) ?>,
+                    dyWeight:           "<?= htmlspecialchars($block->getPackageWeight()) ?>",
+                    token:              "<?= htmlspecialchars($block->getToken()) ?>",
+                    URLColissimo:       "<?= htmlspecialchars($block->getColissimoResourceUrl()) ?>",
+                    updateAddressUrl:   "<?= $block->getUrl('multishipping/colissimo/addressEditPost') ?>",
+                    loaderUrl:          "<?= $block->getViewFileUrl('images/loader-1.gif') ?>"
+                }
+            );
+        }
+    );
+</script>

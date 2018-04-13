@@ -5,6 +5,7 @@
 "Between 0 and 6 days.","Entre 0 et 6 jours"
 "Carrier Name","Nom du transporteur"
 "Colissimo: Please choose a relay point","Colissimo: Veuillez choisir un point de retrait"
+"Colissimo: Please choose %1a relay point%2","Colissimo: Veuillez choisir %1un point de retrait%2"
 "Colissimo: the configuration value for ""Shipping costs calculation"" has to be a number formatted like ""5.00"".","Colissimo : la valeur de configuration ""Calcul des frais de livraison"" doit être un nombre de la forme ""5.50""."
 "Colissimo: the configuration value for ""Shipping costs calculation"" is not available.","Colissimo : la valeur de configuration ""Type des frais de livraison"" n'est pas disponible."
 "Colissimo: the configuration value for ""Shipping costs calculation"" is not well-formed.","Colissimo : la valeur de configuration ""Calcul des frais de livraison"" n'est pas dans le bon format."
@@ -33,3 +34,4 @@
 "Unidentified error","Erreur non identifiée"
 "Weight Limit","Limite de poids"
 "Widget Url","Url du widget"
+"Relay point (chosen at next step)","Point de retrait (choix à la prochaine étape)
