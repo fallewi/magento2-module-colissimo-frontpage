@@ -35,9 +35,9 @@ define(
                         function (newAddressList) {
                             this.isFormInline = newAddressList.length == 0;
                             if (this.isFormInline) {
-                                $('.form-shipping-address').show();
+                                $('#checkout-step-shipping .shipping-new-address-form').show();
                             } else {
-                                $('.form-shipping-address').hide();
+                                $('#checkout-step-shipping .shipping-new-address-form').hide();
                             }
                         },
                         this
