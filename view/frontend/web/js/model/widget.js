@@ -101,19 +101,19 @@ define(
                     this.hide();
                     var relayShippingAddress = relayAddressManager.createRelayAddress(
                         {
-                            firstname   : $t('Relay Point'),
+                            "firstname"   : $t('Relay Point'),
                             // Set in lastname because most of magento renderer doesn't use company field
-                            lastname    : ("nom" in point) ? point.nom : null,
-                            telephone   : quote.shippingAddress().telephone,
-                            postcode    : ("codePostal" in point) ? point.codePostal : null,
-                            city        : ("localite" in point) ? point.localite : null,
-                            countryId   : ("codePays" in point) ? point.codePays : null,
-                            street      : [
+                            "lastname"    : ("nom" in point) ? point.nom : null,
+                            "telephone"   : quote.shippingAddress().telephone,
+                            "postcode"    : ("codePostal" in point) ? point.codePostal : null,
+                            "city"        : ("localite" in point) ? point.localite : null,
+                            "country_id"  : ("codePays" in point) ? point.codePays : null,
+                            "street"      : [
                                 ("adresse1" in point) ? point.adresse1 : ''
                                 + ("adresse2" in point) ? point.adresse2 : ''
                                 + ("adresse3" in point) ? point.adresse3 : ''
                             ],
-                            identifiant : ("identifiant" in point) ? point.identifiant : null
+                            "identifiant" : ("identifiant" in point) ? point.identifiant : null
                         }
                     );
                     relayAddressManager.selectRelayAddress(relayShippingAddress);

@@ -25,7 +25,7 @@
     </type>
 
     <type name="Magento\Quote\Model\Quote\Address">
-        <plugin name="colissimofrontpage-render-relay-address" type="LaPoste\ColissimoFrontPage\Plugin\RenderRelayAddress"/>
+        <plugin name="colissimofrontpage-quote-address" type="LaPoste\ColissimoFrontPage\Plugin\QuoteAddress"/>
     </type>
 
     <type name="Magento\Multishipping\Block\Checkout\Overview">

@@ -16,13 +16,14 @@ namespace LaPoste\ColissimoFrontPage\Plugin;
 use LaPoste\ColissimoFrontPage\Helper\Config;
 use Magento\Checkout\Model\Session;
 use Magento\Quote\Model\Quote\Address;
+use Magento\Quote\Model\Quote\Address\Item;
 
 /**
  * Plugin relay relay addresses.
  *
  * @author Smile (http://www.smile.fr)
  */
-class RenderRelayAddress
+class QuoteAddress
 {
     /** @var Config */
     protected $helper;
@@ -76,5 +77,29 @@ class RenderRelayAddress
             $addressStr .= '<span id="colissimo-relay-address"/>';
         }
         return $addressStr;
+    }
+
+    /**
+     * Prevent magento to add all item in quote shipping address if they already are in relay address.
+     * @see \Magento\Quote\Model\Quote\Address:566
+     *
+     * @param Address $subject
+     * @param array $result
+     * @return array
+     */
+    public function afterGetAllItems(
+        Address $subject,
+        $result
+    ) {
+        if ($this->helper->isActive() && $subject->getAddressType() == 'shipping') {
+            if (
+                $subject->getItemsCollection()->count() == 0
+                && $subject->getQuote()->getIsMultiShipping()
+            ) {
+                $result = [];
+            }
+        }
+
+        return $result;
     }
 }
