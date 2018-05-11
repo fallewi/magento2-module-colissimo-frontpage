@@ -129,7 +129,7 @@ define(
                         lastname    : ("nom" in point) ? point.nom : null,
                         postcode    : ("codePostal" in point) ? point.codePostal : null,
                         city        : ("localite" in point) ? point.localite : null,
-                        countryId   : ("codePays" in point) ? point.codePays : null,
+                        country_id  : ("codePays" in point) ? point.codePays : null,
                         street      : [
                             ("adresse1" in point) ? point.adresse1 : ''
                             + ("adresse2" in point) ? point.adresse2 : ''

@@ -54,6 +54,18 @@ class AddRelayAddressAsShipping
                     $addresses[] = $address;
                 }
             }
+
+            // If the default shipping address doesn't have any item, remove it
+            // (to avoid error when all items are shipped with colissimo frontpage)
+            if (count($addresses) > 1) {
+                $realAddresses = [];
+                foreach ($addresses as $address) {
+                    if ($address->getItemsCollection()->count() > 0) {
+                        $realAddresses[] = $address;
+                    }
+                }
+                $addresses = $realAddresses;
+            }
         }
         return $addresses;
     }

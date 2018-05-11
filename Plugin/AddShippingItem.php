@@ -14,14 +14,13 @@
 namespace LaPoste\ColissimoFrontPage\Plugin;
 
 use LaPoste\ColissimoFrontPage\Helper\Config;
-use Magento\Checkout\Model\Session;
 use Magento\Customer\Model\Address;
 use Magento\Customer\Model\Customer;
+use Magento\Framework\Event\ManagerInterface as EventManager;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Multishipping\Model\Checkout\Type\Multishipping;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\AddressFactory;
-use Magento\Framework\Event\ManagerInterface as EventManager;
 
 /**
  * Plugin the addresses list in multi-shipping context.
@@ -126,7 +125,7 @@ class AddShippingItem
                 // This address has been added after fist magento collect totals,
                 // so magento compensated qty for item without address
                 // we should cancel this action to get a correct item qty
-                $quoteItem->setQty((int)($quoteItem->getQty() - $qty));
+                $quoteItem->setQty((int)($quoteItem->getQty() - $quoteAddressItem->getQty()));
             } else {
                 $quoteAddress->addItem($quoteItem, $qty);
                 // This address has been added after fist magento collect totals,

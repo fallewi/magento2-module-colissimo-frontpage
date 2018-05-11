@@ -67,7 +67,10 @@ class AddressEditPost extends Action
                 foreach ($data as $key => $value) {
                     $address->setData($key, $value);
                 }
+                $address->setData('middlename', '');
                 $address->setData('company', '');
+                $address->setData('region', '');
+                $address->setData('region_id', '');
                 $this->checkoutSession->setData(
                     'colissimofrontpage_shipping_data',
                     json_encode(['relayId' => $relayPointCode])

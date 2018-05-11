@@ -85,7 +85,7 @@ class FrontPage extends Template
      */
     public function getCountry()
     {
-        $shippingAddress = $this->checkoutSession->getQuote()->getShippingAddress();
+        $shippingAddress = $this->getDefaultShippingAddress();
         return $shippingAddress->getCountryId() ?: $this->configHelper->getDefaultCountry();
     }
 
@@ -96,8 +96,10 @@ class FrontPage extends Template
      */
     public function getAddress()
     {
-        $shippingAddress = $this->checkoutSession->getQuote()->getShippingAddress();
-        return $shippingAddress->getStreetFull() ?: $this->configHelper->getDefaultAddress();
+        $shippingAddress = $this->getDefaultShippingAddress();
+        return $shippingAddress->getStreet()
+            ? implode(' ', $shippingAddress->getStreet())
+            : $this->configHelper->getDefaultAddress();
     }
 
     /**
@@ -107,7 +109,7 @@ class FrontPage extends Template
      */
     public function getPostcode()
     {
-        $shippingAddress = $this->checkoutSession->getQuote()->getShippingAddress();
+        $shippingAddress = $this->getDefaultShippingAddress();
         return $shippingAddress->getPostcode() ?: $this->configHelper->getDefaultPostcode();
     }
 
@@ -118,8 +120,30 @@ class FrontPage extends Template
      */
     public function getCity()
     {
-        $shippingAddress = $this->checkoutSession->getQuote()->getShippingAddress();
+        $shippingAddress = $this->getDefaultShippingAddress();
         return $shippingAddress->getCity() ?: $this->configHelper->getDefaultCity();
+    }
+
+    /**
+     * Get default shipping address.
+     *
+     * @return Address
+     */
+    protected function getDefaultShippingAddress()
+    {
+        if (!$this->hasData('default_shipping_address')) {
+            $shippingAddress = $this->checkoutSession->getQuote()->getShippingAddress();
+            if (!$shippingAddress->getCountryId()) {
+                foreach ($this->checkoutSession->getQuote()->getCustomer()->getAddresses() as $address) {
+                    if ($address->isDefaultShipping()) {
+                        $shippingAddress = $address;
+                        break;
+                    }
+                }
+            }
+            $this->setData('default_shipping_address', $shippingAddress);
+        }
+        return $this->getData('default_shipping_address');
     }
 
     /**
