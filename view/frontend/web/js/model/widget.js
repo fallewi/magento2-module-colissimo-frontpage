@@ -44,6 +44,7 @@ define(
                 if (widgetContainer.length) {
                     this.data['callBackFrame'] = 'callBackFrame';
                     if (widgetContainer.frameColissimoOpen) {
+                        console.log(this.data);
                         widgetContainer.frameColissimoOpen(this.data);
                         this.isInitialized = true;
                     } else if (retryNumber < 5) {
@@ -80,6 +81,7 @@ define(
                             && this.isInitialized
                         ) {
                             widgetContainer.frameColissimoClose();
+                            console.log(this.data);
                             widgetContainer.frameColissimoOpen(this.data);
                         }
                     }.bind(this)
