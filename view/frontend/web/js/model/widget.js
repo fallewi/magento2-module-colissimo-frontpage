@@ -39,20 +39,35 @@ define(
              * Init Colissimo FrontPage Widget.
              */
             init: function (retryNumber) {
-                retryNumber = typeof retryNumber == 'undefined' ? 0 : retryNumber;
+                retryNumber = typeof retryNumber === 'undefined' ? 0 : retryNumber;
                 var widgetContainer = $(this.widgetContainerId);
                 if (widgetContainer.length) {
                     this.data['callBackFrame'] = 'callBackFrame';
                     if (widgetContainer.frameColissimoOpen) {
-                        console.log(this.data);
                         widgetContainer.frameColissimoOpen(this.data);
                         this.isInitialized = true;
+                        this.updateCountrySelect();
                     } else if (retryNumber < 5) {
                         setTimeout($.proxy(this.init, this, retryNumber + 1), 1000);
                     }
                 }
+
                 $(document).on('relaySelected', $.proxy(this.selectedRelayPoint, this));
                 $(document).on('click', this.addressElement + ' .edit-relay-address-link', this.show.bind(this));
+            },
+
+            /**
+             * Force country select in widget because of a weird and unresolved bug which
+             * block country selection
+             */
+            updateCountrySelect: function() {
+                $(this.widgetContainerId).on('DOMSubtreeModified', function() {
+                    var widgetContainer = $(this.widgetContainerId),
+                        countrySelect = widgetContainer.find('#listePays');
+                    if (countrySelect[0]) {
+                        countrySelect.find('option[value="' + countrySelect[0].getAttribute('value') + '"]').prop('selected', true);
+                    }
+                }.bind(this));
             },
 
             /**
@@ -72,6 +87,9 @@ define(
                         this.data['ceTown'] = newAddress.city
                             ? newAddress.city
                             : this.data['ceTown'];
+                        this.data['ceCountry'] = newAddress.countryId
+                            ? newAddress.countryId
+                            : this.data['ceCountry'];
 
                         // If widget is already initialize, reset it
                         var widgetContainer = $(this.widgetContainerId);
@@ -81,8 +99,8 @@ define(
                             && this.isInitialized
                         ) {
                             widgetContainer.frameColissimoClose();
-                            console.log(this.data);
                             widgetContainer.frameColissimoOpen(this.data);
+                            this.updateCountrySelect();
                         }
                     }.bind(this)
                 );

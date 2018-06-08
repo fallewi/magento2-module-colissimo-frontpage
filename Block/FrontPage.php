@@ -133,8 +133,11 @@ class FrontPage extends Template
     {
         if (!$this->hasData('default_shipping_address')) {
             $shippingAddress = $this->checkoutSession->getQuote()->getShippingAddress();
-            if (!$shippingAddress->getCountryId()) {
-                foreach ($this->checkoutSession->getQuote()->getCustomer()->getAddresses() as $address) {
+            if (
+                !$shippingAddress->getCountryId()
+                && $addresses = $this->checkoutSession->getQuote()->getCustomer()->getAddresses()
+            ) {
+                foreach ($addresses as $address) {
                     if ($address->isDefaultShipping()) {
                         $shippingAddress = $address;
                         break;

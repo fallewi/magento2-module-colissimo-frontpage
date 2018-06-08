@@ -45,11 +45,26 @@ define(
                     if (widgetContainer.frameColissimoOpen) {
                         widgetContainer.frameColissimoOpen(this.data);
                         this.isInitialized = true;
+                        this.updateCountrySelect();
                     } else if (retryNumber < 5) {
                         setTimeout($.proxy(this.init, this, retryNumber + 1), 1000);
                     }
                 }
                 $(document).on('relaySelected', $.proxy(this.selectedRelayPoint, this));
+            },
+
+            /**
+             * Force country select in widget because of a weird and unresolved bug which
+             * block country selection
+             */
+            updateCountrySelect: function() {
+                $(this.widgetContainerId).on('DOMSubtreeModified', function() {
+                    var widgetContainer = $(this.widgetContainerId),
+                        countrySelect = widgetContainer.find('#listePays');
+                    if (countrySelect[0]) {
+                        countrySelect.find('option[value="' + countrySelect[0].getAttribute('value') + '"]').prop('selected', true);
+                    }
+                }.bind(this));
             },
 
             /**
